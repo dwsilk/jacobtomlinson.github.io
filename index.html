@@ -1,48 +1,52 @@
 ---
 layout: default
 ---
+<div id="bg-new">
+    <div class="main">
 
-
-<div class="container-fluid index">
-    <div class="row">
-
-        <div class="col-md-12 main content-panel">
-
-            <div class="gravatar">
-                <img src="{{ site.title_image }}" class="img-circle about-image" height="150" width="150" alt="{{ site.title }}" />
+        {% for name in site.data.names %}
+            {% if forloop.index <= 1 %}
+            <div class="name active">
+            {% else %}
+            <div class="name">
+            {% endif %}
+            <p class="joining">Hi I'm</p>
+            <p>
+                <a href="{{ name.url }}">
+                    <i class="fab fa-{{ name.icon }}"></i> {{ name.name }}
+                </a>
+            </p>
             </div>
+        {% endfor %}
 
-            <h1 class="header author-header" itemprop="headline">{{ site.title }}</h1>
+        {% for interest in site.data.personal-interests %}
 
-            <div class="author-text">
-                {{ site.title_description }}
+            {% if forloop.index <= 1 %}
+            <div class="personal-interest active">
+            {% else %}
+            <div class="personal-interest">
+            {% endif %}
+
+            <p class="joining">I'm {{ interest.prefix }}</p>
+            <p>
+                <a href="{{ interest.url }}">{{ interest.interest }}</a>
+            </p>
             </div>
+        {% endfor %}
 
-            {% include social_links.html %}
-          </div>
-          <div class="col-md-12 main content-panel">
+        {% for interest in site.data.professional-interests %}
 
-            <div class="articles">
+            {% if forloop.index <= 1 %}
+            <div class="professional-interest active">
+            {% else %}
+            <div class="professional-interest">
+            {% endif %}
 
-              <h2>Latest Articles</h2>
-
-              <ul>
-                  {% for post in site.posts | limit: site.post_limit %}
-
-                      <li>
-                          <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-                          <small class="hidden-xs">{{ post.date | date: "%B %-d, %Y" }}</small>
-                      </li>
-
-                  {% endfor %}
-                  <li>
-                      <small><i><a href="{{ site.baseurl }}/posts/">more...</a></i></small>
-                  </li>
-              </ul>
-
+            <p class="joining">and sometimes {{ interest.prefix }}</p>
+            <p>
+                <a href="{{ interest.url }}">{{ interest.interest }}</a>
+            </p>
             </div>
-
-        </div>
-
+        {% endfor %}
     </div>
 </div>
